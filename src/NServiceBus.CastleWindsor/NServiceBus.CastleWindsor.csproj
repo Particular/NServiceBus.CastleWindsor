@@ -79,7 +79,7 @@
     <Compile Include="WindsorBuilder.cs" />
     <Compile Include="WindsorExtensions.cs" />
     <Compile Include="WindsorObjectBuilder.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml">
