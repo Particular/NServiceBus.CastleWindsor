@@ -10,26 +10,17 @@
     using Common;
     using Logging;
 
-    /// <summary>
-    /// Castle Windsor implementation of IContainer.
-    /// </summary>
     class WindsorObjectBuilder : IContainer
     {
         IWindsorContainer container;
         IDisposable scope;
         static ILog Logger = LogManager.GetLogger<WindsorObjectBuilder>();
 
-        /// <summary>
-        /// Instantiates the class with a new WindsorContainer.
-        /// </summary>
         public WindsorObjectBuilder()
             : this(new WindsorContainer())
         {
         }
 
-        /// <summary>
-        /// Instantiates the class saving the given container.
-        /// </summary>
         public WindsorObjectBuilder(IWindsorContainer container)
         {
             if (container == null)
@@ -59,11 +50,6 @@
             }
         }
 
-
-        /// <summary>
-        /// Returns a child instance of the container to facilitate deterministic disposal
-        /// of all resources built by the child container.
-        /// </summary>
         public IContainer BuildChildContainer()
         {
             return new WindsorObjectBuilder(container)
@@ -73,7 +59,7 @@
         }
 
 
-        void IContainer.Configure(Type concreteComponent, DependencyLifecycle dependencyLifecycle)
+        public void Configure(Type concreteComponent, DependencyLifecycle dependencyLifecycle)
         {
             var registrations = container.Kernel.GetAssignableHandlers(concreteComponent).Select(x=>x.ComponentModel);
 
@@ -106,7 +92,7 @@
             container.Register(Component.For(services).UsingFactoryMethod(componentFactory).LifeStyle.Is(lifestyle));
         }
 
-        void IContainer.ConfigureProperty(Type component, string property, object value)
+        public void ConfigureProperty(Type component, string property, object value)
         {
             var registration = container.Kernel.GetAssignableHandlers(component).Select(x => x.ComponentModel).SingleOrDefault();
 
@@ -120,7 +106,7 @@
             registration.CustomDependencies[dependency.Key] = dependency.Value;
         }
 
-        void IContainer.RegisterSingleton(Type lookupType, object instance)
+        public void RegisterSingleton(Type lookupType, object instance)
         {
             var registration = container.Kernel.GetAssignableHandlers(lookupType).Select(x => x.ComponentModel).FirstOrDefault();
 
@@ -135,22 +121,22 @@
             container.Register(Component.For(services).Activator<ExternalInstanceActivatorWithDecommissionConcern>().Instance(instance).LifestyleSingleton());
         }
 
-        object IContainer.Build(Type typeToBuild)
+        public object Build(Type typeToBuild)
         {
             return container.Resolve(typeToBuild);
         }
 
-        IEnumerable<object> IContainer.BuildAll(Type typeToBuild)
+        public IEnumerable<object> BuildAll(Type typeToBuild)
         {
             return container.ResolveAll(typeToBuild).Cast<object>();
         }
 
-        bool IContainer.HasComponent(Type componentType)
+        public bool HasComponent(Type componentType)
         {
             return container.Kernel.HasComponent(componentType);
         }
 
-        void IContainer.Release(object instance)
+        public void Release(object instance)
         {
             container.Release(instance);
         }
