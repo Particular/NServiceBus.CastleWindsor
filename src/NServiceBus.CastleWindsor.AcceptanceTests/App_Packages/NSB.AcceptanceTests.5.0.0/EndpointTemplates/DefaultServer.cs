@@ -46,8 +46,8 @@
             builder.DefineBuilder(settings);
             builder.RegisterComponents(r =>
             {
-                r.RegisterSingleton(runDescriptor.ScenarioContext.GetType(), runDescriptor.ScenarioContext);
                 r.RegisterSingleton(typeof(ScenarioContext), runDescriptor.ScenarioContext);
+                r.RegisterSingleton(runDescriptor.ScenarioContext.GetType(), runDescriptor.ScenarioContext);
             });
 
        
