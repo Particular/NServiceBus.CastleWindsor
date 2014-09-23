@@ -87,6 +87,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\packaging\nuget\NServiceBus.ObjectBuilder.CastleWindsor.nuspec">
+      <Link>NServiceBus.ObjectBuilder.CastleWindsor.nuspec</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

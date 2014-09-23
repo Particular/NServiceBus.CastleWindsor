@@ -5,11 +5,6 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.CastleWindsor", "NServiceBus.CastleWindsor\NServiceBus.CastleWindsor.csproj", "{9A9A0BD5-AC37-4B90-B90F-FD1C1395FEBD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{984D7B19-08B8-4FCA-AE46-C7F3BD292FC1}"
-	ProjectSection(SolutionItems) = preProject
-		..\packaging\nuget\NServiceBus.ObjectBuilder.CastleWindsor.nuspec = ..\packaging\nuget\NServiceBus.ObjectBuilder.CastleWindsor.nuspec
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F00EC152-ADA9-4E22-91AE-A6B4189DAF57}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
