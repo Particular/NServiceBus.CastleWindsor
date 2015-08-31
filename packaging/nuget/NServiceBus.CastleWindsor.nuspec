@@ -9,17 +9,17 @@
     <licenseUrl>$licenseUrl$</licenseUrl>
     <projectUrl>$projectUrl$</projectUrl>
     <iconUrl>$iconUrl$</iconUrl>
+    <copyright>$copyright$</copyright>
     <requireLicenseAcceptance>$requireLicenseAcceptance$</requireLicenseAcceptance>
     <description>The CastleWindsor Container for the nservicebus</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright 2010-2014 NServiceBus. All rights reserved</copyright>
     <tags>nservicebus servicebus msmq cqrs publish subscribe</tags>
     <dependencies>
-      <dependency id="NServiceBus" version="[5.0.0, 6.0.0)" />
+      <dependency id="NServiceBus" version="[6.0.0-unstable, 6.0.0)" />
       <dependency id="Castle.Windsor" version="[3.3.0, 4.0.0)" />
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\binaries\NServiceBus.ObjectBuilder.CastleWindsor.???" target="lib\net45" />
+    <file src="..\..\binaries\NServiceBus.ObjectBuilder.CastleWindsor.???" target="lib\net451" />
   </files>
 </package>
