@@ -7,15 +7,11 @@
     using Castle.MicroKernel.Lifestyle;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
-    using Common;
-    using Logging;
+    using NServiceBus.Logging;
+    using NServiceBus.ObjectBuilder.Common;
 
     class WindsorObjectBuilder : IContainer
     {
-        IWindsorContainer container;
-        IDisposable scope;
-        static ILog Logger = LogManager.GetLogger<WindsorObjectBuilder>();
-
         public WindsorObjectBuilder()
             : this(new WindsorContainer())
         {
@@ -25,10 +21,11 @@
         {
             if (container == null)
             {
-                throw new ArgumentNullException("container", "The object builder must be initialized with a valid windsor container");
+                throw new ArgumentNullException(nameof(container), "The object builder must be initialized with a valid windsor container");
             }
 
             this.container = container;
+            scope = container.BeginScope();
         }
 
         public void Dispose()
@@ -36,32 +33,20 @@
             //Injected at compile time
         }
 
-        void DisposeManaged()
-        {
-            //if we are in a child scope dispose of that but not the parent container
-            if (scope != null)
-            {
-                scope.Dispose();
-                return;
-            }
-            if (container != null)
-            {
-                container.Dispose();
-            }
-        }
-
         public IContainer BuildChildContainer()
         {
             return new WindsorObjectBuilder(container)
-                                {
-                                    scope = container.Kernel.BeginScope()
-                                };
+            {
+                isChild = true
+            };
         }
 
 
         public void Configure(Type concreteComponent, DependencyLifecycle dependencyLifecycle)
         {
-            var registrations = container.Kernel.GetAssignableHandlers(concreteComponent).Select(x=>x.ComponentModel);
+            ThrowIfCalledOnChildContainer();
+
+            var registrations = container.Kernel.GetAssignableHandlers(concreteComponent).Select(x => x.ComponentModel);
 
             if (registrations.Any())
             {
@@ -72,12 +57,14 @@
             var lifestyle = GetLifestyleTypeFrom(dependencyLifecycle);
             var services = GetAllServiceTypesFor(concreteComponent);
 
-            container.Register(Component.For(services).ImplementedBy(concreteComponent).LifeStyle.Is(lifestyle));            
+            container.Register(Component.For(services).ImplementedBy(concreteComponent).LifeStyle.Is(lifestyle));
         }
 
         void IContainer.Configure<T>(Func<T> componentFactory, DependencyLifecycle dependencyLifecycle)
         {
-            var componentType = typeof (T);
+            ThrowIfCalledOnChildContainer();
+
+            var componentType = typeof(T);
             var registrations = container.Kernel.GetAssignableHandlers(componentType).Select(x => x.ComponentModel);
 
             if (registrations.Any())
@@ -94,6 +81,8 @@
 
         public void ConfigureProperty(Type component, string property, object value)
         {
+            ThrowIfCalledOnChildContainer();
+
             var registration = container.Kernel.GetAssignableHandlers(component).Select(x => x.ComponentModel).SingleOrDefault();
 
             if (registration == null)
@@ -108,6 +97,8 @@
 
         public void RegisterSingleton(Type lookupType, object instance)
         {
+            ThrowIfCalledOnChildContainer();
+
             var registration = container.Kernel.GetAssignableHandlers(lookupType).Select(x => x.ComponentModel).FirstOrDefault();
 
             if (registration != null)
@@ -116,7 +107,10 @@
                 return;
             }
 
-            var services = GetAllServiceTypesFor( instance.GetType() ).Union( new[] { lookupType } );
+            var services = GetAllServiceTypesFor(instance.GetType()).Union(new[]
+            {
+                lookupType
+            });
 
             container.Register(Component.For(services).Activator<ExternalInstanceActivatorWithDecommissionConcern>().Instance(instance).LifestyleSingleton());
         }
@@ -141,6 +135,25 @@
             container.Release(instance);
         }
 
+        void DisposeManaged()
+        {
+            scope.Dispose();
+
+            //if we are in a child scope dispose of that but not the parent container
+            if (!isChild)
+            {
+                container?.Dispose();
+            }
+        }
+
+        void ThrowIfCalledOnChildContainer()
+        {
+            if (isChild)
+            {
+                throw new InvalidOperationException("Reconfiguration of child containers is not allowed.");
+            }
+        }
+
         static LifestyleType GetLifestyleTypeFrom(DependencyLifecycle dependencyLifecycle)
         {
             switch (dependencyLifecycle)
@@ -160,9 +173,15 @@
         {
             return t.GetInterfaces()
                 .Where(x => !x.FullName.StartsWith("System."))
-                .Concat(new[] {t});
+                .Concat(new[]
+                {
+                    t
+                });
         }
 
-  
+        static ILog Logger = LogManager.GetLogger<WindsorObjectBuilder>();
+        IWindsorContainer container;
+        bool isChild;
+        IDisposable scope;
     }
 }
