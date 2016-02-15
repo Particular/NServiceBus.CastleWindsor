@@ -43,7 +43,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NServiceBus.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NServiceBus.6.0.0-unstable1534\lib\net452\NServiceBus.Core.dll</HintPath>
+      <HintPath>..\packages\NServiceBus.6.0.0-unstable1543\lib\net452\NServiceBus.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
@@ -59,12 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1534\TestContainerBuilder.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1534\When_building_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1534\When_disposing_the_builder.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1534\When_querying_for_registered_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1534\When_registering_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1534\When_using_nested_containers.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1543\TestContainerBuilder.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1543\When_building_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1543\When_disposing_the_builder.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1543\When_querying_for_registered_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1543\When_registering_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable1543\When_using_nested_containers.cs" />
     <Compile Include="SetUpFixture.cs" />
     <Compile Include="When_base_type_is_registered.cs" />
   </ItemGroup>
@@ -76,6 +76,9 @@
       <Project>{9A9A0BD5-AC37-4B90-B90F-FD1C1395FEBD}</Project>
       <Name>NServiceBus.CastleWindsor</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

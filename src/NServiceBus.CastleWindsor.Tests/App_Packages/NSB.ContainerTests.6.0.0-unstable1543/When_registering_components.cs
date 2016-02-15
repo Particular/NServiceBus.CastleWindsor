@@ -27,7 +27,7 @@ namespace NServiceBus.ContainerTests
         {
             using (var builder = TestContainerBuilder.ConstructBuilder())
             {
-                builder.Configure(() => ((StaticFactory)builder.Build(typeof(StaticFactory))).Create(), DependencyLifecycle.InstancePerCall);
+                builder.Configure(() => ((StaticFactory) builder.Build(typeof(StaticFactory))).Create(), DependencyLifecycle.InstancePerCall);
                 builder.Configure(() => new StaticFactory(), DependencyLifecycle.SingleInstance);
 
                 Assert.NotNull(builder.Build(typeof(ComponentCreatedByFactory)));
@@ -72,7 +72,7 @@ namespace NServiceBus.ContainerTests
 
                 builder.Configure(typeof(ComponentThatDependsOnMultiSingletons), DependencyLifecycle.InstancePerCall);
 
-                var dependency = (ComponentThatDependsOnMultiSingletons)builder.Build(typeof(ComponentThatDependsOnMultiSingletons));
+                var dependency = (ComponentThatDependsOnMultiSingletons) builder.Build(typeof(ComponentThatDependsOnMultiSingletons));
 
                 Assert.NotNull(dependency.Singleton1);
                 Assert.NotNull(dependency.Singleton2);
@@ -95,7 +95,7 @@ namespace NServiceBus.ContainerTests
                 builder.Configure(typeof(DuplicateClass), DependencyLifecycle.SingleInstance);
                 builder.ConfigureProperty(typeof(DuplicateClass), "AnotherProperty", true);
 
-                var component = (DuplicateClass)builder.Build(typeof(DuplicateClass));
+                var component = (DuplicateClass) builder.Build(typeof(DuplicateClass));
                 Assert.True(component.SomeProperty);
 
                 Assert.True(component.AnotherProperty);
@@ -111,7 +111,7 @@ namespace NServiceBus.ContainerTests
                 builder.ConfigureProperty(typeof(DuplicateClass), "SomeProperty", false);
                 builder.ConfigureProperty(typeof(DuplicateClass), "SomeProperty", true); // this should remove/override the previous property setting
 
-                var component = (DuplicateClass)builder.Build(typeof(DuplicateClass));
+                var component = (DuplicateClass) builder.Build(typeof(DuplicateClass));
                 Assert.True(component.SomeProperty);
             }
         }
@@ -143,7 +143,7 @@ namespace NServiceBus.ContainerTests
                 builder.ConfigureProperty(typeof(ClassWithSetterDependencies), "SimpleDependency", 1);
                 builder.ConfigureProperty(typeof(ClassWithSetterDependencies), "StringDependency", "Test");
 
-                var component = (ClassWithSetterDependencies)builder.Build(typeof(ClassWithSetterDependencies));
+                var component = (ClassWithSetterDependencies) builder.Build(typeof(ClassWithSetterDependencies));
                 Assert.AreEqual(component.EnumDependency, SomeEnum.X);
                 Assert.AreEqual(component.SimpleDependency, 1);
                 Assert.AreEqual(component.StringDependency, "Test");
@@ -162,7 +162,7 @@ namespace NServiceBus.ContainerTests
                 builder.Configure(typeof(ClassWithSetterDependencies), DependencyLifecycle.SingleInstance);
                 builder.ConfigureProperty(typeof(ClassWithSetterDependencies), "InterfaceDependency", new SomeOtherClass());
 
-                var component = (ClassWithSetterDependencies)builder.Build(typeof(ClassWithSetterDependencies));
+                var component = (ClassWithSetterDependencies) builder.Build(typeof(ClassWithSetterDependencies));
                 Assert.IsInstanceOf(typeof(SomeOtherClass), component.InterfaceDependency, "Explicitly set dependency should be injected, not container's default type");
             }
         }
