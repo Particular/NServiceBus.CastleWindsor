@@ -16,7 +16,7 @@
     <tags>nservicebus servicebus msmq cqrs publish subscribe</tags>
     <dependencies>
       <dependency id="NServiceBus" version="[6.0.0-unstable, 7.0.0)" />
-      <dependency id="Castle.Windsor" version="[3.3.0, 4.0.0)" />
+      <dependency id="Castle.Windsor" version="[3.3.3, 4.0.0)" />
     </dependencies>
   </metadata>
   <files>

@@ -9,7 +9,6 @@
     {
         public override void ProcessResource(IResource resource, IConfigurationStore store, IKernel kernel)
         {
-
         }
     }
 }

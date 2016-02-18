@@ -51,8 +51,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Castle.Core.3.3.1\lib\net45\Castle.Core.dll</HintPath>
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
@@ -62,7 +62,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="NServiceBus.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NServiceBus.6.0.0-unstable0658\lib\net451\NServiceBus.Core.dll</HintPath>
+      <HintPath>..\packages\NServiceBus.6.0.0-unstable1554\lib\net452\NServiceBus.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Obsolete, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1ca091877d12ca03, processorArchitecture=MSIL">
@@ -77,7 +77,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigureWindsorBuilder_Obsolete.cs" />
     <Compile Include="ExternalInstanceActivatorWithDecommissionConcern.cs" />
     <Compile Include="NoOpInterpreter.cs" />
     <Compile Include="WindsorBuilder.cs" />
