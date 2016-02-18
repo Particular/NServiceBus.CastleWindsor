@@ -99,11 +99,12 @@
         {
             ThrowIfCalledOnChildContainer();
 
-            var registration = container.Kernel.GetAssignableHandlers(lookupType).Select(x => x.ComponentModel).FirstOrDefault();
+            var lookupTypeFullname = lookupType.FullName;
+            var registration = container.Kernel.GetHandler(lookupTypeFullname);
 
             if (registration != null)
             {
-                registration.ExtendedProperties["instance"] = instance;
+                registration.ComponentModel.ExtendedProperties["instance"] = instance;
                 return;
             }
 
@@ -112,7 +113,7 @@
                 lookupType
             });
 
-            container.Register(Component.For(services).Activator<ExternalInstanceActivatorWithDecommissionConcern>().Instance(instance).LifestyleSingleton());
+            container.Register(Component.For(services).Activator<ExternalInstanceActivatorWithDecommissionConcern>().Instance(instance).NamedAutomatically(lookupTypeFullname).LifestyleSingleton());
         }
 
         public object Build(Type typeToBuild)
