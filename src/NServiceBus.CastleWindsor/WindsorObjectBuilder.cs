@@ -12,8 +12,7 @@
 
     class WindsorObjectBuilder : IContainer
     {
-        public WindsorObjectBuilder()
-            : this(new WindsorContainer())
+        public WindsorObjectBuilder() : this(new WindsorContainer())
         {
         }
 
@@ -78,7 +77,7 @@
 
             container.Register(Component.For(services).UsingFactoryMethod(componentFactory).LifeStyle.Is(lifestyle));
         }
-        
+
         public void RegisterSingleton(Type lookupType, object instance)
         {
             ThrowIfCalledOnChildContainer();
@@ -158,15 +157,12 @@
         {
             return t.GetInterfaces()
                 .Where(x => !x.FullName.StartsWith("System."))
-                .Concat(new[]
-                {
-                    t
-                });
+                .Concat(new[] { t });
         }
 
-        static ILog Logger = LogManager.GetLogger<WindsorObjectBuilder>();
         IWindsorContainer container;
         bool isChild;
         IDisposable scope;
+        static ILog Logger = LogManager.GetLogger<WindsorObjectBuilder>();
     }
 }
