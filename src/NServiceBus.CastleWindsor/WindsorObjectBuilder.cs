@@ -78,23 +78,7 @@
 
             container.Register(Component.For(services).UsingFactoryMethod(componentFactory).LifeStyle.Is(lifestyle));
         }
-
-        public void ConfigureProperty(Type component, string property, object value)
-        {
-            ThrowIfCalledOnChildContainer();
-
-            var registration = container.Kernel.GetAssignableHandlers(component).Select(x => x.ComponentModel).SingleOrDefault();
-
-            if (registration == null)
-            {
-                var message = "Cannot configure property for a type which hadn't been configured yet. Please call 'Configure' first.";
-                throw new InvalidOperationException(message);
-            }
-
-            var dependency = Property.ForKey(property).Eq(value);
-            registration.CustomDependencies[dependency.Key] = dependency.Value;
-        }
-
+        
         public void RegisterSingleton(Type lookupType, object instance)
         {
             ThrowIfCalledOnChildContainer();
