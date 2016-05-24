@@ -7,8 +7,8 @@
     using Castle.MicroKernel.Lifestyle;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
-    using NServiceBus.Logging;
-    using NServiceBus.ObjectBuilder.Common;
+    using Logging;
+    using Common;
 
     class WindsorObjectBuilder : IContainer
     {
