@@ -12,7 +12,7 @@ namespace NServiceBus.AcceptanceTests
     // ReSharper disable once PartialTypeWithSinglePart
     public abstract partial class NServiceBusAcceptanceTest
     {
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
             Conventions.EndpointNamingConvention = t =>

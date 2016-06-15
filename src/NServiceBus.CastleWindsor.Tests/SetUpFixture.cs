@@ -5,10 +5,9 @@ using NUnit.Framework;
 [SetUpFixture]
 public class SetUpFixture
 {
-    [SetUp]
+    [OneTimeSetUp]
     public void Setup()
     {
         TestContainerBuilder.ConstructBuilder = () => new WindsorObjectBuilder();
     }
-
 }
