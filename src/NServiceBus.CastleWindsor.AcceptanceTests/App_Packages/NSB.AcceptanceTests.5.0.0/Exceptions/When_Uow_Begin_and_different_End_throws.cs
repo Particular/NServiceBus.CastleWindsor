@@ -18,31 +18,13 @@
             var context = new Context();
 
             Scenario.Define(context)
-                    .WithEndpoint<Endpoint>(b => b.Given(bus => bus.SendLocal(new Message())))
-                    .AllowExceptions()
-                    .Done(c => c.ExceptionReceived)
-                    .Run();
+                .WithEndpoint<Endpoint>(b => b.Given(bus => bus.SendLocal(new Message())))
+                .AllowExceptions()
+                .Done(c => c.ExceptionReceived)
+                .Run();
 
             Assert.AreEqual(typeof(BeginException), context.InnerExceptionOneType);
             Assert.AreEqual(typeof(EndException), context.InnerExceptionTwoType);
-
-            
-#if (!DEBUG)
-
-            StackTraceAssert.StartsWith(
-@"at NServiceBus.UnitOfWorkBehavior.Invoke(IncomingContext context, Action next)
-at NServiceBus.ChildContainerBehavior.Invoke(IncomingContext context, Action next)
-at NServiceBus.ProcessingStatisticsBehavior.Invoke(IncomingContext context, Action next)
-at NServiceBus.Pipeline.PipelineExecutor.Execute[T](BehaviorChain`1 pipelineAction, T context)
-at NServiceBus.Unicast.Transport.TransportReceiver.ProcessMessage(TransportMessage message)
-at NServiceBus.Unicast.Transport.TransportReceiver.TryProcess(TransportMessage message)", context.StackTrace);
-
-            StackTraceAssert.StartsWith(
-string.Format(@"at NServiceBus.AcceptanceTests.Exceptions.When_Uow_Begin_and_different_End_throws.Endpoint.{0}.End(Exception ex)
-at NServiceBus.UnitOfWorkBehavior.AppendEndExceptionsAndRethrow(Exception initialException)", context.TypeName), context.InnerExceptionTwoStackTrace);
-
-#endif
-
         }
 
         public class Context : ScenarioContext
@@ -107,7 +89,7 @@ at NServiceBus.UnitOfWorkBehavior.AppendEndExceptionsAndRethrow(Exception initia
             public class UnitOfWorkThatThrows1 : IManageUnitsOfWork
             {
                 public Context Context { get; set; }
-                
+
                 bool throwAtEnd;
 
                 [MethodImpl(MethodImplOptions.NoInlining)]
