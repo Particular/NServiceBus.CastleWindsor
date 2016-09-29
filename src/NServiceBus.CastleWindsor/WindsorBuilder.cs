@@ -17,15 +17,25 @@
         /// <returns>The new container wrapper.</returns>
         public override ObjectBuilder.Common.IContainer CreateContainer(ReadOnlySettings settings)
         {
-            IWindsorContainer existingContainer;
+            ContainerHolder containerHolder;
 
-            if (settings.TryGet("ExistingContainer", out existingContainer))
+            if (settings.TryGet(out containerHolder))
             {
-                return new WindsorObjectBuilder(existingContainer);
+                return new WindsorObjectBuilder(containerHolder.ExistingContainer);
 
             }
 
             return new WindsorObjectBuilder();
+        }
+
+        internal class ContainerHolder
+        {
+            public ContainerHolder(IWindsorContainer container)
+            {
+                ExistingContainer = container;
+            }
+
+            public IWindsorContainer ExistingContainer { get; }
         }
     }
 }

@@ -15,7 +15,7 @@
         /// <param name="container">The existing container instance.</param>
         public static void ExistingContainer(this ContainerCustomizations customizations, IWindsorContainer container)
         {
-            customizations.Settings.Set("ExistingContainer", container);
+            customizations.Settings.Set<WindsorBuilder.ContainerHolder>(new WindsorBuilder.ContainerHolder(container));
         }
     }
 }
