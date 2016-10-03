@@ -13,15 +13,20 @@
     class WindsorObjectBuilder : IContainer
     {
         IWindsorContainer container;
+        bool owned;
         IDisposable scope;
         static ILog Logger = LogManager.GetLogger<WindsorObjectBuilder>();
 
         public WindsorObjectBuilder()
-            : this(new WindsorContainer())
+            : this(new WindsorContainer(), true)
         {
         }
 
-        public WindsorObjectBuilder(IWindsorContainer container)
+        public WindsorObjectBuilder(IWindsorContainer container) : this(container, false)
+        {
+        }
+
+        public WindsorObjectBuilder(IWindsorContainer container, bool owned)
         {
             if (container == null)
             {
@@ -29,6 +34,7 @@
             }
 
             this.container = container;
+            this.owned = owned;
         }
 
         public void Dispose()
@@ -44,7 +50,7 @@
                 scope.Dispose();
                 return;
             }
-            if (container != null)
+            if (container != null && owned)
             {
                 container.Dispose();
             }
@@ -72,7 +78,7 @@
             var lifestyle = GetLifestyleTypeFrom(dependencyLifecycle);
             var services = GetAllServiceTypesFor(concreteComponent);
 
-            container.Register(Component.For(services).ImplementedBy(concreteComponent).LifeStyle.Is(lifestyle));            
+            container.Register(Component.For(services).ImplementedBy(concreteComponent).LifeStyle.Is(lifestyle));
         }
 
         void IContainer.Configure<T>(Func<T> componentFactory, DependencyLifecycle dependencyLifecycle)
@@ -163,6 +169,6 @@
                 .Concat(new[] {t});
         }
 
-  
+
     }
 }

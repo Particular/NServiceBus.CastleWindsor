@@ -7,7 +7,7 @@
     <ProjectGuid>{7CC19BCF-C5F3-4681-BEB1-8EFBE67DE459}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NServiceBus.CastleWindsor.AcceptanceTests</RootNamespace>
+    <RootNamespace>NServiceBus.AcceptanceTests</RootNamespace>
     <AssemblyName>NServiceBus.CastleWindsor.AcceptanceTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.1\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NServiceBus.AcceptanceTesting">
       <HintPath>..\packages\NServiceBus.AcceptanceTesting.5.0.0\lib\net45\NServiceBus.AcceptanceTesting.dll</HintPath>
     </Reference>
@@ -167,6 +175,8 @@
     <Compile Include="App_Packages\NSB.AcceptanceTests.5.0.0\Tx\When_sending_within_an_ambient_transaction.cs" />
     <Compile Include="App_Packages\NSB.AcceptanceTests.5.0.0\Versioning\When_multiple_versions_of_a_message_is_published.cs" />
     <Compile Include="App_Packages\NSB.AcceptanceTests.5.0.0\Volatile\When_sending_to_non_durable_endpoint.cs" />
+    <Compile Include="ContainerDecorator.cs" />
+    <Compile Include="When_using_externally_owned_container.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
