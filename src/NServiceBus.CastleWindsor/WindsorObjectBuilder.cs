@@ -7,22 +7,27 @@
     using Castle.MicroKernel.Lifestyle;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
-    using NServiceBus.Logging;
-    using NServiceBus.ObjectBuilder.Common;
+    using Logging;
+    using Common;
 
     class WindsorObjectBuilder : IContainer
     {
-        public WindsorObjectBuilder() : this(new WindsorContainer())
+        public WindsorObjectBuilder() : this(new WindsorContainer(), true)
         {
         }
 
-        public WindsorObjectBuilder(IWindsorContainer container)
+        public WindsorObjectBuilder(IWindsorContainer container) : this(container, false)
+        {
+        }
+
+        public WindsorObjectBuilder(IWindsorContainer container, bool owned)
         {
             if (container == null)
             {
                 throw new ArgumentNullException(nameof(container), "The object builder must be initialized with a valid windsor container");
             }
 
+            this.owned = owned;
             this.container = container;
             scope = container.BeginScope();
         }
@@ -124,7 +129,7 @@
             scope.Dispose();
 
             //if we are in a child scope dispose of that but not the parent container
-            if (!isChild)
+            if (!isChild && owned)
             {
                 container?.Dispose();
             }
@@ -164,5 +169,6 @@
         bool isChild;
         IDisposable scope;
         static ILog Logger = LogManager.GetLogger<WindsorObjectBuilder>();
+        bool owned;
     }
 }
