@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.12
-MinimumVisualStudioVersion = 10.0.40219.1
+MinimumVisualStudioVersion = 15.0.26430.12
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.CastleWindsor", "NServiceBus.CastleWindsor\NServiceBus.CastleWindsor.csproj", "{9A9A0BD5-AC37-4B90-B90F-FD1C1395FEBD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.CastleWindsor.AcceptanceTests", "NServiceBus.CastleWindsor.AcceptanceTests\NServiceBus.CastleWindsor.AcceptanceTests.csproj", "{7CC19BCF-C5F3-4681-BEB1-8EFBE67DE459}"
