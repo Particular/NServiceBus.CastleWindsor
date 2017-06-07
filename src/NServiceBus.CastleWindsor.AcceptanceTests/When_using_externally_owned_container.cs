@@ -37,6 +37,7 @@
                     var container = new WindsorContainer();
                     var decorator = new ContainerDecorator(container);
 
+                    config.SendFailedMessagesTo("error");
                     config.UseContainer<WindsorBuilder>(c => c.ExistingContainer(container));
 
                     var context = (Context)desc.ScenarioContext;
