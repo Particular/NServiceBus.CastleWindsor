@@ -40,7 +40,7 @@
             {
                 public async Task Handle(MyMessage message, IMessageHandlerContext context)
                 {
-                    await context.SendLocal(new Reply());
+                    await context.SendLocal(new Reply()).ConfigureAwait(false);
                 }
             }
 
