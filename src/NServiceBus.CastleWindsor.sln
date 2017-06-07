@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.CastleWindsor", "NServiceBus.CastleWindsor\NServiceBus.CastleWindsor.csproj", "{9A9A0BD5-AC37-4B90-B90F-FD1C1395FEBD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F00EC152-ADA9-4E22-91AE-A6B4189DAF57}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.CastleWindsor.AcceptanceTests", "NServiceBus.CastleWindsor.AcceptanceTests\NServiceBus.CastleWindsor.AcceptanceTests.csproj", "{7CC19BCF-C5F3-4681-BEB1-8EFBE67DE459}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.CastleWindsor.Tests", "NServiceBus.CastleWindsor.Tests\NServiceBus.CastleWindsor.Tests.csproj", "{3A61CFEA-0513-492C-81C1-A6890062FAC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus.CastleWindsor.Tests", "NServiceBus.CastleWindsor.Tests\NServiceBus.CastleWindsor.Tests.csproj", "{3A61CFEA-0513-492C-81C1-A6890062FAC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
