@@ -26,6 +26,6 @@
     <PackageReference Include="Fody" Version="2.1.0" />
     <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012" />
     <None Include="..\..\GitVersion.yml" Link="GitVersion.yml" />
-    <None Include="..\..\packaging\nuget\NServiceBus.CastleWindsor.nuspec" />
+    <None Include="..\..\packaging\nuget\NServiceBus.CastleWindsor.nuspec" Link="NServiceBus.CastleWindsor.nuspec"/>
   </ItemGroup>
 </Project>
