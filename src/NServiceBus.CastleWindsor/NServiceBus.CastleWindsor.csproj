@@ -11,7 +11,7 @@
     <DebugSymbols>True</DebugSymbols>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <OutputPath>..\..\binaries\</OutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NoWarn>CS0419</NoWarn>
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <PackageReference Include="NServiceBus" Version="7.0.0-alpharelease0051" />
     <PackageReference Include="Obsolete.Fody" Version="4.2.4" PrivateAssets="All" />
     <PackageReference Include="Fody" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012" PrivateAssets="All"/>
+    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012" PrivateAssets="All" />
     <None Include="..\..\GitVersion.yml" Link="GitVersion.yml" />
   </ItemGroup>
 </Project>
