@@ -9,6 +9,7 @@
     <PackageReference Include="NServiceBus.AcceptanceTesting" Version="7.0.0-alpharelease0051" />
     <PackageReference Include="NServiceBus" Version="7.0.0-alpharelease0051" />
     <PackageReference Include="NUnit" Version="3.7.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.7.0" />
     <ProjectReference Include="..\NServiceBus.CastleWindsor\NServiceBus.CastleWindsor.csproj" />
   </ItemGroup>
 </Project>
