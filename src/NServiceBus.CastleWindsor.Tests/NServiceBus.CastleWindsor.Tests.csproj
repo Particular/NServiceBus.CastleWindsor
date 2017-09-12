@@ -1,29 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net452;netcoreapp2.0</TargetFrameworks>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)NServiceBus.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworks>net462;netcoreapp2.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)NServiceBus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\NServiceBus.CastleWindsor\NServiceBus.CastleWindsor.csproj" />
     <Compile Remove="NServiceBus.ObjectBuilder.CastleWindsor.approved.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NServiceBus" Version="[7.0.0-*,8.0)" />
-    <PackageReference Include="NServiceBus.ContainerTests.Sources" Version="[7.0.0-*,8.0)" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="NServiceBus.ContainerTests.Sources" Version="7.0.0-*" />
+    <PackageReference Include="Castle.Core" Version="4.*" />
+    <PackageReference Include="Castle.Windsor" Version="4.*" />
     <PackageReference Include="Mono.Cecil" Version="0.10.0-beta6" />
     <PackageReference Include="NUnit" Version="3.7.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.8.0-alpha1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
     <Compile Remove="APIApprovals.cs" />
     <Compile Remove="ApprovalTestConfig.cs" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <PackageReference Include="ApiApprover" Version="6.1.0-*" />
     <PackageReference Include="PublicApiGenerator" Version="6.1.0-*" />
     <PackageReference Include="ApprovalTests" Version="3.*" />
