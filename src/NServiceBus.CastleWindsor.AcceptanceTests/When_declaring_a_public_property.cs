@@ -14,7 +14,7 @@
             var context = await Scenario.Define<Context>()
                 .WithEndpoint<Endpoint>(b => b.When((bus, c) => bus.SendLocal(new MyMessage())))
                 .Done(c => c.WasCalled)
-                .Run();
+                .Run().ConfigureAwait(false);
 
             Assert.IsTrue(context.PropertyWasInjected);
         }
@@ -29,7 +29,11 @@
         {
             public Endpoint()
             {
-                EndpointSetup<DefaultServer>(config => config.RegisterComponents(c => c.ConfigureComponent<MyPropDependency>(DependencyLifecycle.SingleInstance)));
+                EndpointSetup<DefaultServer>(config =>
+                {
+                    config.SendFailedMessagesTo("error");
+                    config.RegisterComponents(c => c.ConfigureComponent<MyPropDependency>(DependencyLifecycle.SingleInstance));
+                });
             }
 
             public class MyMessageHandler : IHandleMessages<MyMessage>
