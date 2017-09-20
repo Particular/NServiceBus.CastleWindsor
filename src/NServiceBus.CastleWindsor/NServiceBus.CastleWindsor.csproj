@@ -12,7 +12,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <Description>Adapter for the Castle Windsor IoC Container</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>NServiceBus.CastleWindsor</PackageId>
   </PropertyGroup>
   <ItemGroup>
