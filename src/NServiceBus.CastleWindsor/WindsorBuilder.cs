@@ -21,9 +21,19 @@
 
             if (settings.TryGet(out containerHolder))
             {
+                settings.AddStartupDiagnosticsSection("NServiceBus.CastleWindsor", new
+                {
+                    UsingExistingContainer = true
+                });
+
                 return new WindsorObjectBuilder(containerHolder.ExistingContainer);
 
             }
+
+            settings.AddStartupDiagnosticsSection("NServiceBus.CastleWindsor", new
+            {
+                UsingExistingContainer = false
+            });
 
             return new WindsorObjectBuilder();
         }
