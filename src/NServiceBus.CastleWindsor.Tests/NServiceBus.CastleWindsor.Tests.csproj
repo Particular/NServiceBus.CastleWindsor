@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.*" />
     <PackageReference Include="Castle.Windsor" Version="4.*" />
     <PackageReference Include="NServiceBus.ContainerTests.Sources" Version="7.0.0-*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
