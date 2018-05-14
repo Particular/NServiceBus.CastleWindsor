@@ -88,7 +88,7 @@
             ThrowIfCalledOnChildContainer();
 
             var lookupTypeFullname = lookupType.FullName;
-            var registration = container.Kernel.GetHandler(lookupTypeFullname);
+            var registration = container.Kernel.GetHandler(lookupType);
 
             if (registration != null)
             {
