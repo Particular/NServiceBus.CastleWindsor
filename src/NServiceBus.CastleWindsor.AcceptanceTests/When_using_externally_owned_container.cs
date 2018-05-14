@@ -16,7 +16,7 @@
             var context = await Scenario.Define<Context>()
                 .WithEndpoint<Endpoint>()
                 .Done(c => c.EndpointsStarted)
-                .Run();
+                .Run().ConfigureAwait(false);
 
             Assert.IsFalse(context.Decorator.Disposed);
             Assert.DoesNotThrow(() => context.Container.Dispose());
@@ -37,6 +37,7 @@
                     var container = new WindsorContainer();
                     var decorator = new ContainerDecorator(container);
 
+                    config.SendFailedMessagesTo("error");
                     config.UseContainer<WindsorBuilder>(c => c.ExistingContainer(container));
 
                     var context = (Context)desc.ScenarioContext;
