@@ -277,18 +277,40 @@
             return null;
         }
 
+        public object Resolve(Type service, Arguments arguments)
+        {
+            return null;
+        }
+
+        public T Resolve<T>(Arguments arguments)
+        {
+            return default(T);
+        }
+
+        public T Resolve<T>(string key, Arguments arguments)
+        {
+            return default(T);
+        }
+
+        public object Resolve(string key, Type service, Arguments arguments)
+        {
+            return null;
+        }
+
+        public Array ResolveAll(Type service, Arguments arguments)
+        {
+            return null;
+        }
+
+        public T[] ResolveAll<T>(Arguments arguments)
+        {
+            return new T[]
+            {
+            };
+        }
+
         public IKernel Kernel { get; }
         public string Name { get; }
         public IWindsorContainer Parent { get; set; }
-
-        object IWindsorContainer.this[string key]
-        {
-            get { return null; }
-        }
-
-        object IWindsorContainer.this[Type service]
-        {
-            get { return null; }
-        }
     }
 }
