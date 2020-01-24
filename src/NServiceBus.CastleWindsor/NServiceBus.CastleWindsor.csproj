@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Windsor" Version="[4.1.0, 5.0.0)" />
+    <PackageReference Include="Castle.Windsor" Version="[5.0.0, 6.0.0)" />
     <PackageReference Include="NServiceBus" Version="[7.0.0, 8.0.0)" />
     <PackageReference Include="Fody" Version="3.3.5" PrivateAssets="All" />
     <PackageReference Include="Janitor.Fody" Version="1.6.5" PrivateAssets="All" />
