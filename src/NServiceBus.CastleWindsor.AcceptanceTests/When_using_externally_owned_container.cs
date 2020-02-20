@@ -38,7 +38,9 @@
                     var decorator = new ContainerDecorator(container);
 
                     config.SendFailedMessagesTo("error");
+#pragma warning disable 0618
                     config.UseContainer<WindsorBuilder>(c => c.ExistingContainer(container));
+#pragma warning restore 0618
 
                     var context = (Context)desc.ScenarioContext;
                     context.Container = container;
