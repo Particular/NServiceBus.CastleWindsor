@@ -32,7 +32,9 @@
                 EndpointSetup<DefaultServer>(config =>
                 {
                     config.SendFailedMessagesTo("error");
+#pragma warning disable 0618
                     config.UseContainer<WindsorBuilder>(b => b.ExistingContainer(container));
+#pragma warning restore 0618
                 });
             }
 
