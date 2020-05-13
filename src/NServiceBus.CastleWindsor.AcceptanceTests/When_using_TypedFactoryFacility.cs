@@ -11,15 +11,19 @@
     public class When_using_TypedFactoryFacility : NServiceBusAcceptanceTest
     {
         [Test]
-        public Task should_not_error()
+        public async Task Should_not_error()
         {
-            return Scenario.Define<Context>()
+            var context = await Scenario.Define<Context>()
                 .WithEndpoint<Endpoint>(b => b.When(bus => bus.SendLocal(new MyMessage())))
+                .Done(c => c.GotTheMessage)
                 .Run();
+
+            Assert.True(context.GotTheMessage);
         }
 
         public class Context : ScenarioContext
         {
+            public bool GotTheMessage { get; set; }
         }
 
         public class Endpoint : EndpointConfigurationBuilder
@@ -40,16 +44,19 @@
 
             public class MyMessageHandler : IHandleMessages<MyMessage>
             {
-                public async Task Handle(MyMessage message, IMessageHandlerContext context)
+                readonly Context testContext;
+
+                public MyMessageHandler(Context testContext)
                 {
-                    await context.SendLocal(new Reply()).ConfigureAwait(false);
+                    this.testContext = testContext;
+                }
+                public Task Handle(MyMessage message, IMessageHandlerContext context)
+                {
+                    testContext.GotTheMessage = true;
+
+                    return Task.FromResult(0);
                 }
             }
-
-        }
-
-        public class Reply : ICommand
-        {
         }
 
         public class MyMessage : ICommand
