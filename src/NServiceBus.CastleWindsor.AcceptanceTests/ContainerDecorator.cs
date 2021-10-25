@@ -73,17 +73,17 @@
         {
             return null;
         }
-        
+
         public T Resolve<T>()
         {
-            return default(T);
+            return default;
         }
-        
+
         public T Resolve<T>(string key)
         {
-            return default(T);
+            return default;
         }
-        
+
         public T[] ResolveAll<T>()
         {
             return new T[]
@@ -95,7 +95,7 @@
         {
             return null;
         }
-        
+
         public object Resolve(Type service, Arguments arguments)
         {
             return null;
@@ -103,12 +103,12 @@
 
         public T Resolve<T>(Arguments arguments)
         {
-            return default(T);
+            return default;
         }
 
         public T Resolve<T>(string key, Arguments arguments)
         {
-            return default(T);
+            return default;
         }
 
         public object Resolve(string key, Type service, Arguments arguments)

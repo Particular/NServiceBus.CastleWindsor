@@ -3,15 +3,15 @@
     using System.Threading.Tasks;
     using AcceptanceTesting;
     using AcceptanceTests;
+    using Castle.Facilities.TypedFactory;
+    using Castle.Windsor;
     using EndpointTemplates;
     using NUnit.Framework;
-    using Castle.Windsor;
-    using Castle.Facilities.TypedFactory;
 
     public class When_using_TypedFactoryFacility : NServiceBusAcceptanceTest
     {
         [Test]
-        public Task should_not_error()
+        public Task Should_not_error()
         {
             return Scenario.Define<Context>()
                 .WithEndpoint<Endpoint>(b => b.When(bus => bus.SendLocal(new MyMessage())))
