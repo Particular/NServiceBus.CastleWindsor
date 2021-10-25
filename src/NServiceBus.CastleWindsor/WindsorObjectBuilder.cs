@@ -7,8 +7,8 @@
     using Castle.MicroKernel.Lifestyle;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
-    using Logging;
     using Common;
+    using Logging;
 
     class WindsorObjectBuilder : IContainer
     {
@@ -22,13 +22,8 @@
 
         public WindsorObjectBuilder(IWindsorContainer container, bool owned)
         {
-            if (container == null)
-            {
-                throw new ArgumentNullException(nameof(container), "The object builder must be initialized with a valid windsor container");
-            }
-
             this.owned = owned;
-            this.container = container;
+            this.container = container ?? throw new ArgumentNullException(nameof(container), "The object builder must be initialized with a valid windsor container");
             scope = container.BeginScope();
         }
 
@@ -124,6 +119,7 @@
             container.Release(instance);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Fody.Janitor")]
         void DisposeManaged()
         {
             scope.Dispose();
@@ -153,9 +149,9 @@
                     return LifestyleType.Singleton;
                 case DependencyLifecycle.InstancePerUnitOfWork:
                     return LifestyleType.Scoped;
+                default:
+                    throw new ArgumentException("Unhandled lifecycle - " + dependencyLifecycle);
             }
-
-            throw new ArgumentException("Unhandled lifecycle - " + dependencyLifecycle);
         }
 
         static IEnumerable<Type> GetAllServiceTypesFor(Type t)
