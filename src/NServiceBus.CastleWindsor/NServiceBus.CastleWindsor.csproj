@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
@@ -16,11 +16,11 @@
   <ItemGroup>
     <PackageReference Include="Castle.Windsor" Version="[5.0.0, 6.0.0)" />
     <PackageReference Include="NServiceBus" Version="[7.0.0, 8.0.0)" />
-    <PackageReference Include="Fody" Version="6.5.4" PrivateAssets="All" />
-    <PackageReference Include="Janitor.Fody" Version="1.8.0" PrivateAssets="All" />
-    <PackageReference Include="Obsolete.Fody" Version="5.2.0" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="6.6.0" PrivateAssets="All" />
+    <PackageReference Include="Janitor.Fody" Version="1.9.0" PrivateAssets="All" />
+    <PackageReference Include="Obsolete.Fody" Version="5.3.0" PrivateAssets="All" />
     <PackageReference Include="Particular.CodeRules" Version="0.2.1" PrivateAssets="All" />
-    <PackageReference Include="Particular.Packaging" Version="1.2.1" PrivateAssets="All" />
+    <PackageReference Include="Particular.Packaging" Version="1.4.0" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
